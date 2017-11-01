@@ -1,0 +1,36 @@
+{
+  "name": "dasheck-phaser-boilerplate",
+  "version": "1.0.0",
+  "description": "This is a project, which craetes boilerplate code for phaser 2 projects",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "s"
+  },
+  "keywords": [
+    "phaser",
+    "mvp",
+    "boilerplate"
+  ],
+  "author": "Stefan Neidig <s.neidig@appcom-interactive.de> (http://appcom-interactive.de)",
+  "license": "MIT",
+  "devDependencies": {
+    "archiver": "^2.1.0",
+    "babel-cli": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "download-github-release": "^0.3.2",
+    "get-folder-size": "^1.0.0",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^7.0.0",
+    "mkdirp": "^0.5.1",
+    "moment": "^2.19.1",
+    "zip": "^1.2.0"
+  },
+  "dependencies": {
+    "del": "^3.0.0",
+    "gulp-minify": "^1.0.0"
+  }
+}
