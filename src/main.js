@@ -10,4 +10,7 @@ window.onload = () => {
     game.state.start('bootState', true, false, {
         testState: 'assets/json/testState.json'
     }, 'testState');
+
+
+
 };
