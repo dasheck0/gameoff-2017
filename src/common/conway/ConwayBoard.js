@@ -15,7 +15,11 @@ class ConwayBoard {
             for (let x = 0; x < this.length; x++) {
                 const position = `${x},${y}`;
 
-                if (ConwayBoard.rand(0, 9) < 7) {
+                const rand = Math.random();
+
+                if (rand < ConwayBoard.BLOCKED_RATE) {
+                    this.cells[position] = -1;
+                } else if (rand < ConwayBoard.EMPTY_RATE) {
                     this.cells[position] = 0;
                 } else {
                     this.cells[position] = ConwayBoard.rand(0, partyCount);
@@ -32,28 +36,30 @@ class ConwayBoard {
         const nextIteration = _.assign({}, this.cells);
 
         _.forIn(this.cells, (value, position) => {
-            const [x, y] = position.split(',').map(p => parseInt(p));
-            const neighbors = this.getNeigborsOfCell(this.cells, x, y);
+            if (value >= 0) {
+                const [x, y] = position.split(',').map(p => parseInt(p));
+                const neighbors = this.getNeigborsOfCell(this.cells, x, y);
 
-            const aliveNeighbors = _.omit(neighbors, [0]);
-            const aliveNeighborCount = _.values(aliveNeighbors).reduce((a, b) => a + b, 0);
+                const aliveNeighbors = _.omit(neighbors, [0]);
+                const aliveNeighborCount = _.values(aliveNeighbors).reduce((a, b) => a + b, 0);
 
-            if (value === 0) {
-                if (aliveNeighborCount === 3) {
-                    const maxValue = _.maxBy(_.entries(aliveNeighbors), entry => entry[1])[1];
-                    const agent = _.sample(_.entries(aliveNeighbors).filter(entry => entry[1] === maxValue))[0];
+                if (value === 0) {
+                    if (aliveNeighborCount === 3) {
+                        const maxValue = _.maxBy(_.entries(aliveNeighbors), entry => entry[1])[1];
+                        const agent = _.sample(_.entries(aliveNeighbors).filter(entry => entry[1] === maxValue))[0];
 
-                    nextIteration[position] = agent;
+                        nextIteration[position] = agent;
+                    } else {
+                        nextIteration[position] = 0;
+                    }
                 } else {
-                    nextIteration[position] = 0;
-                }
-            } else {
-                if (aliveNeighborCount < 2) {
-                    nextIteration[position] = 0;
-                } else if (aliveNeighborCount > 3) {
-                    nextIteration[position] = 0;
-                } else {
-                    nextIteration[position] = value;
+                    if (aliveNeighborCount < 2) {
+                        nextIteration[position] = 0;
+                    } else if (aliveNeighborCount > 3) {
+                        nextIteration[position] = 0;
+                    } else {
+                        nextIteration[position] = value;
+                    }
                 }
             }
         });
@@ -121,5 +127,13 @@ class ConwayBoard {
 
     static get STACK_SIZE() {
         return 6;
+    }
+
+    static get EMPTY_RATE() {
+        return 0.65;
+    }
+
+    static get BLOCKED_RATE() {
+        return 0.05;
     }
 }
