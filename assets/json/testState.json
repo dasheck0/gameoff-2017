@@ -1,5 +1,33 @@
 {
-  "assets": {},
-  "groups": {},
-  "prefabs": {}
+  "state": {
+    "backgroundColor": "ffffff",
+    "advancedTiming": true,
+    "physics": {
+      "enabled": true,
+      "type": "arcade"
+    }
+  },
+  "assets": {
+    "monsterPlant01": {
+      "type": "image",
+      "source": "assets/images/monsterPlant01.png"
+    }
+  },
+  "groups": [
+    "background",
+    "monsters"
+  ],
+  "prefabs": {
+    "monsterPlant01": {
+      "type": "sprite",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "properties": {
+        "group": "monsters",
+        "key": "monsterPlant01"
+      }
+    }
+  }
 }

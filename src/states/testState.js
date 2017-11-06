@@ -1,20 +1,25 @@
 let Game = Game || {};
 
 Game.TestState = function () {
-    Phaser.State.call(this);
+    Game.BaseState.call(this);
 
+    this.prefabClasses = {
+        'sprite': Game.Prefab.prototype.constructor
+    }
 };
 
-Game.TestState.prototype = Object.create(Phaser.State.prototype);
+Game.TestState.prototype = Object.create(Game.BaseState.prototype);
 Game.TestState.prototype.constructor = Game.TestState;
 
 Game.TestState.prototype.create = function () {
+    Game.BaseState.prototype.create.call(this);
+
     this.graphics = this.game.add.graphics(0, 0);
     this.graphics.lineStyle(1, 0x000000, 1);
 
     this.board = new ConwayBoard(32, 20);
     this.board.initialize(3);
-    this.drawBoard();
+    //this.drawBoard();
 
     // this.game.input.onDown.add(() => {
     //     this.board.nextIteration();
@@ -23,7 +28,7 @@ Game.TestState.prototype.create = function () {
 
     this.game.time.events.loop(0.25 * Phaser.Timer.SECOND, () => {
         this.board.nextIteration();
-        this.drawBoard();
+       // this.drawBoard();
     }, this);
 };
 
