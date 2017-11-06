@@ -1,0 +1,1 @@
+const mod = (number, mod) => ((number % mod) + mod) % mod;

@@ -11,22 +11,49 @@
     "monsterPlant01": {
       "type": "image",
       "source": "assets/images/monsterPlant01.png"
+    },
+    "monsterWoof01": {
+      "type": "image",
+      "source": "assets/images/monsterWoof01.png"
+    },
+    "monsterGoblin01": {
+      "type": "image",
+      "source": "assets/images/monsterGoblin01.png"
     }
   },
   "groups": [
+    "spawners",
     "background",
     "monsters"
   ],
   "prefabs": {
-    "monsterPlant01": {
-      "type": "sprite",
+    "charakterChooser": {
+      "type": "charakterChooser",
       "position": {
-        "x": 0,
-        "y": 0
+        "x": 500,
+        "y": 600
       },
       "properties": {
-        "group": "monsters",
-        "key": "monsterPlant01"
+        "group": "spawners",
+        "pool": "monsters",
+        "anchor": {
+          "x": 0.5,
+          "y": 1
+        },
+        "charakters": [
+          {
+            "name": "Plant 01",
+            "key": "monsterPlant01"
+          },
+          {
+            "name": "Woof 01",
+            "key": "monsterWoof01"
+          },
+          {
+            "name": "Goblin 03",
+            "key": "monsterGoblin01"
+          }
+        ]
       }
     }
   }
