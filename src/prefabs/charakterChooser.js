@@ -15,7 +15,7 @@ Game.CharakterChooser = function (state, name, position, properties) {
             alpha: 0,
             group: properties.pool,
             key: charakter.key,
-            anchor: properties.anchor || { x: 1, y: 1 }
+            anchor: properties.anchor || { x: 0.5, y: 1 }
         });
 
         charakterPrefab.alpha = 0;
@@ -83,16 +83,20 @@ Game.CharakterChooser.prototype.chooseCharakter = function (callback, context) {
     if (!this.isAnimating) {
         this.isAnimating = true;
 
-        // center scale + fade animation
-        this.game.add.tween(this.charakters[this.index])
-            .to({
-                alpha: 0.5,
-                x: Game.screenSize.x * 1.5
-            }, this.animationTime, Phaser.Easing.Quintic.Out, true)
-            .onComplete.addOnce(() => {
-            this.isAnimating = false;
+        //this.charakters[this.index].anchor = { x: 0.5, y: 0.5 };
+        this.charakters[this.index].alpha = 1;
 
+        this.game.add.tween(this.charakters[this.index])
+            .to({ alpha: 0 }, this.animationTime * 0.5, Phaser.Easing.Quintic.Out, true);
+
+        this.game.add.tween(this.charakters[this.index].scale)
+            .to({ x: 4, y: 4 }, this.animationTime * 0.5, Phaser.Easing.Quintic.Out, true)
+            .onComplete.addOnce(() => {
+            this.charakters[this.index].scale = { x: 1.0, y: 1.0 };
+            //this.charakters[this.index].anchor = this.properties.anchor || { x: 0.5, y: 1 };
+
+            this.isAnimating = false;
             callback.call(context, this.index);
-        }, this);
+        });
     }
 };
